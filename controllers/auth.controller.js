@@ -13,9 +13,10 @@ const signup = async (req, res, next) => {
       email: req.body.email,
       password: passwordCrypt,
       username: req.body.username,
+      role: req.body.role,
       avatar: req.body.avatar || undefined,
     });
-    res.json({ error: false, contendio: result });
+    res.json({ error: false, contenido: result });
   } catch (error) {
     next(error)
   }
@@ -23,7 +24,7 @@ const signup = async (req, res, next) => {
 
 const login = async (req, res) => {
   res.json({
-    token: jwt.sign({ user: req.user._id, rol: 'Admin' }, 'secreto', { expiresIn: '1d' }),
+    token: jwt.sign({ user: req.user._id, role: req.user.role }, 'secreto', { expiresIn: '1d' }),
   });
 };
 

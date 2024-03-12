@@ -6,7 +6,6 @@ const express = require("express");
 
 const app = express();
 
-// require("./config")(app);
 const config = require('./config');
 config(app);
 

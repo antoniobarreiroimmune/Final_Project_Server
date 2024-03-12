@@ -24,13 +24,16 @@ const userSchema = new Schema(
       salt: { type: String, required: true },
       hash: { type: String, required: true },
     },
+    role: {
+      type: String,
+      required: [true, 'A role is needed'],
+      enum: ['Admin', 'Guard', 'Pathologist'] 
+    },
     avatar: {
       type: String,
       default:
         'https://static-00.iconduck.com/assets.00/avatar-default-icon-2048x2048-h6w375ur.png',
     },
-    favoriteRestaurants: [{ type: Schema.Types.ObjectId, ref: 'Restaurant' }],
-    createdRestaurants: [{ type: Schema.Types.ObjectId, ref: 'Restaurant' }],
   },
   {
     timestamps: true,
