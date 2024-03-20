@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const passport = require('passport');
 const { login, signup, verify } = require('../controllers/auth.controller');
-const usernameMiddleware = require('../middleware/auth.middleware');
+
 
 
 router.all('/fail', (req, res) => {
@@ -13,6 +13,6 @@ router.post('/login', passport.authenticate("login", { session: false, failureRe
 
 router.post('/signup', signup);
 
-router.post('/verify', [passport.authenticate('jwt', { session: false }), usernameMiddleware],  verify);
+router.post('/verify', [passport.authenticate('jwt', { session: false })],  verify);
 
 module.exports = router;

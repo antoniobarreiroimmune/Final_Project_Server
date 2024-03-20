@@ -1,4 +1,4 @@
-const Pathology = require('../models/pathology.model');
+const {Pathology} = require('../models/pathology.model');
 const FinalReport = require('../models/finalReport.model');
 
 const pathologyController = {
@@ -29,14 +29,12 @@ const pathologyController = {
     
             await pathology.save();
     
-            if (updates.completed && pathology.completed) {
+            if (updates.pathologyCompleted && pathology.pathologyCompleted) {
                 const finalReport = new FinalReport(pathology.toObject());
                 
                 
-                finalReport.completed = false;
     
                 await finalReport.save();
-                await Pathology.deleteOne({ _id: id });
                 return res.send(finalReport);
             }
     

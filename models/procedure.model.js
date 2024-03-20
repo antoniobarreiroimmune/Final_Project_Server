@@ -59,12 +59,20 @@ const procedureSchema = new mongoose.Schema({
     enum: ['Primera Instancia n1 A Coruña', 'Primera Instancia n2 A Coruña', 'Primera Instancia n3 A Coruña', 'Primera Instancia n4 A Coruña'],
     default: 'First Instance n1 A Coruña' 
   },
-  completed: {
+
+  procedureReport:{
+    type: String,
+    required: false,
+    trim: true
+  },
+
+  procedureCompleted: {
     type: Boolean,
     required: true,
-    default: true 
+    default: false
   }
 });
+
 
 
 procedureSchema.pre('save', function(next) {
@@ -76,4 +84,4 @@ procedureSchema.pre('save', function(next) {
 
 const Procedure = mongoose.model('Procedure', procedureSchema);
 
-module.exports = Procedure;
+module.exports =  { Procedure, procedureSchema}

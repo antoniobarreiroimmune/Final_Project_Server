@@ -1,5 +1,5 @@
-const Procedure = require('../models/procedure.model');
-const Pathology = require('../models/pathology.model');
+const {Procedure} = require('../models/procedure.model');
+const {Pathology} = require('../models/pathology.model');
 
 const procedureController = {
     createProcedure: async (req, res) => {
@@ -38,14 +38,13 @@ const procedureController = {
     
             await procedure.save();
     
-            if (updates.completed && procedure.completed) {
+            if (updates.procedureCompleted && procedure.procedureCompleted) {
                 const pathology = new Pathology(procedure.toObject());
                 
                 
-                pathology.completed = false;
+              
     
                 await pathology.save();
-                await Procedure.deleteOne({ _id: id });
                 return res.send(pathology);
             }
     

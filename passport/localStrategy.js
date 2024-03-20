@@ -32,6 +32,7 @@ passport.use(
     {
       usernameField: 'email',
       passwordField: 'password',
+      
     },
     async function (email, password, done) {
       

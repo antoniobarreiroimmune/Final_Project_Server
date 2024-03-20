@@ -39,15 +39,7 @@ npm run dev
 
 # API Routes
 
-## **Restaurants routes**:
 
-| URL path                    | HTTP Method       | Response                          | Action                        |
-| :--------------------------:|:-----------------:| :--------------------------------:| :----------------------------:|
-| /api/restaurants/list       | GET               | [restaurants]                     | Get all restaurants     |
-| /api/restaurants/getOne/:restaurant_id            | GET               | {restaurant}                | Get one Restaurant     |
-| /api/restaurants/create            | POST               | {createdRestaurant}                | Create Restaurant      |
-| /api/restaurants/edit/:restaurant_id            | PUT               | {editedRestaurant}                | Edit one restaurant     |
-| /api/restaurants/delete/:restaurant_id           | DELETE               | {msg: "Restaurant successfully deleted!" }                | Delete one restaurant     |
 
 ## **User routes**:
 
