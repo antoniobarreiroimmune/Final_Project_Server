@@ -21,6 +21,22 @@ const procedureController = {
         }
     },
 
+    getOneProcedure: async (req, res) => {
+        const { id } = req.params;
+
+        try {
+            const procedure = await Procedure.findById(id);
+
+            if (!procedure) {
+                return res.status(404).send({ message: "Procedure not found." });
+            }
+
+            res.send(procedure);
+        } catch (error) {
+            res.status(500).send(error);
+        }
+    },
+
     updateProcedure: async (req, res) => {
         const { id } = req.params;
         const updates = req.body;

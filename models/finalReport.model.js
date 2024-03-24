@@ -18,4 +18,4 @@ const finalReportSchema = new mongoose.Schema({
 
 const FinalReport = mongoose.model('FinalReport', finalReportSchema);
 
-module.exports = FinalReport;
+module.exports = {FinalReport, finalReportSchema};

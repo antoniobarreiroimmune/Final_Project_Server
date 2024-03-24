@@ -1,5 +1,5 @@
 const {Pathology} = require('../models/pathology.model');
-const FinalReport = require('../models/finalReport.model');
+const {FinalReport} = require('../models/finalReport.model');
 
 const pathologyController = {
     

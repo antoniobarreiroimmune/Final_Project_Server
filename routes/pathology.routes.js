@@ -6,6 +6,6 @@ const roleMiddleware = require('../middleware/auth.middleware');
 
 
 router.get('/list', [passport.authenticate('jwt', { session: false }), roleMiddleware(['Pathologist', 'Guard'])], pathologyController.getAllPathologys);
-router.put('/:id', [passport.authenticate('jwt', { session: false }), roleMiddleware('Pathologist')], pathologyController.updatePathology);
+router.put('/edit/:id', [passport.authenticate('jwt', { session: false }), roleMiddleware('Pathologist')], pathologyController.updatePathology);
 
 module.exports = router;

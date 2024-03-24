@@ -1,6 +1,11 @@
 const mongoose = require('mongoose');
 
 const procedureSchema = new mongoose.Schema({
+  guardId: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: [true, 'The user is mandatory'],
+    ref: 'User'
+  },
   name: {
     type: String,
     required: [true, 'The name is mandatory'],
@@ -16,51 +21,51 @@ const procedureSchema = new mongoose.Schema({
     required: [true, 'The second surname is mandatory'],
     trim: true,
   },
-  dni: { 
+  dni: {
     type: String,
     required: [true, 'The DNI is mandatory'],
     unique: true,
   },
   location: {
-    type: String, 
-    required: [true, 'The location is mandatory'], 
+    type: String,
+    required: [true, 'The location is mandatory'],
     trim: true
   },
   observations: {
-    type: String, 
-    required: false, 
+    type: String,
+    required: false,
     trim: true
   },
-  
+
   createdAt: {
     type: Date,
-    default: Date.now 
+    default: Date.now
   },
   updatedAt: {
     type: Date,
     default: Date.now
   },
-  
+
   isGenderViolence: {
     type: Boolean,
     required: true,
-    default: false 
+    default: false
   },
-  
+
   isDomesticViolence: {
     type: Boolean,
     required: true,
-    default: false 
+    default: false
   },
-  
+
   judicialBody: {
     type: String,
     required: true,
     enum: ['Primera Instancia n1 A Coruña', 'Primera Instancia n2 A Coruña', 'Primera Instancia n3 A Coruña', 'Primera Instancia n4 A Coruña'],
-    default: 'First Instance n1 A Coruña' 
+    default: ''
   },
 
-  procedureReport:{
+  procedureReport: {
     type: String,
     required: false,
     trim: true
@@ -75,13 +80,13 @@ const procedureSchema = new mongoose.Schema({
 
 
 
-procedureSchema.pre('save', function(next) {
-    if (this.isModified() || this.isNew) {
-        this.updatedAt = Date.now();
-    }
-    next();
+procedureSchema.pre('save', function (next) {
+  if (this.isModified() || this.isNew) {
+    this.updatedAt = Date.now();
+  }
+  next();
 });
 
 const Procedure = mongoose.model('Procedure', procedureSchema);
 
-module.exports =  { Procedure, procedureSchema}
+module.exports = { Procedure, procedureSchema }

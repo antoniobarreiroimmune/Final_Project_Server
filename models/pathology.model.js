@@ -13,7 +13,14 @@ const pathologySchema = new mongoose.Schema({
     type: Boolean,
     required: true,
     default: false 
-  }
+  },
+  pathologyId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: false
+  },
+ 
+  
 });
 
 const Pathology = mongoose.model('Pathology', pathologySchema);
