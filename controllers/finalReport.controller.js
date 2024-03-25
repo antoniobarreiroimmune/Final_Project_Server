@@ -1,14 +1,14 @@
-const {FinalReport} = require('../models/finalReport.model');
+const { FinalReport } = require('../models/finalReport.model');
 const Archive = require('../models/archive.model');
 
 const finalReportController = {
     
     getAllReports: async (req, res) => {
         try {
-            const procedures = await FinalReport.find({});
-            res.send(procedures);
+            const reports = await FinalReport.find({});
+            res.json(reports);  
         } catch (error) {
-            res.status(500).send(error);
+            res.status(500).json(error);  
         }
     },
 
@@ -20,7 +20,7 @@ const finalReportController = {
             let finalReport = await FinalReport.findById(id);
     
             if (!finalReport) {
-                return res.status(404).send({ message: "Report not found." });
+                return res.status(404).json({ message: "Report not found." });  
             }
     
             Object.keys(updates).forEach(update => {
@@ -30,20 +30,17 @@ const finalReportController = {
             await finalReport.save();
     
             if (updates.finalReportCompleted && finalReport.finalReportCompleted) {
-                const Archive = new Archive(finalReport.toObject());
+                const archive = new Archive(finalReport.toObject());  
                 
-                
-    
-                await Archive.save();
-                return res.send(Archive);
+                await archive.save();
+                return res.json(archive);  
             }
     
-            res.send(finalReport);
+            res.json(finalReport);  
         } catch (error) {
-            res.status(400).send(error);
+            res.status(400).json(error);  
         }
     }
-    
 };
 
 module.exports = finalReportController;
