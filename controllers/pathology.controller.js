@@ -1,5 +1,6 @@
 const { Pathology } = require('../models/pathology.model');
 const { FinalReport } = require('../models/finalReport.model');
+const { create } = require('../models/user.model');
 
 const pathologyController = {
 
@@ -31,6 +32,7 @@ const pathologyController = {
 
             if (updates.pathologyCompleted && pathology.pathologyCompleted) {
                 const finalReport = new FinalReport(pathology.toObject());
+                createdAt: pathology.createdAt;
                 await finalReport.save();
                 return res.json(finalReport);  
             }

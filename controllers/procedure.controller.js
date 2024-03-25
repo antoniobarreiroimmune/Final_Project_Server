@@ -48,6 +48,7 @@ const procedureController = {
             await procedure.save();
             if (updates.procedureCompleted && procedure.procedureCompleted) {
                 const pathology = new Pathology(procedure.toObject());
+                createdAt: procedure.createdAt,
                 await pathology.save();
                 return res.json(pathology);
             }

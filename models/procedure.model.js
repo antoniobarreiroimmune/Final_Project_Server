@@ -55,6 +55,7 @@ const procedureSchema = new mongoose.Schema({
   procedureReport: {
     type: String,
     required: false,
+    default: '',
     trim: true
   },
   procedureCompleted: {

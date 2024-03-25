@@ -8,6 +8,21 @@ const userSchema = new Schema(
       unique: true,
       trim: true,
     },
+    name: {
+      type: String,
+      required: [true, 'A name is needed!'],
+      trim: true,
+    },
+    firstName: {
+      type: String,
+      required: [true, 'A first name is needed!'],
+      trim: true,
+    },
+    lastName: {
+      type: String,
+      required: [true, 'A last name is needed!'],
+      trim: true,
+    },
     email: {
       type: String,
       required: [true, 'An email is needed'],
@@ -29,11 +44,7 @@ const userSchema = new Schema(
       required: [true, 'A role is needed'],
       enum: ['Admin', 'Guard', 'Pathologist'] 
     },
-    avatar: {
-      type: String,
-      default:
-        'https://static-00.iconduck.com/assets.00/avatar-default-icon-2048x2048-h6w375ur.png',
-    },
+    
   },
   {
     timestamps: true,

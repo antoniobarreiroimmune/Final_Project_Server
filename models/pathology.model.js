@@ -7,6 +7,7 @@ const pathologySchema = new mongoose.Schema({
   pathologyReport: {
     type: String,
     required: false,
+    default: '',
     trim: true
   },
   pathologyCompleted: {
@@ -19,9 +20,10 @@ const pathologySchema = new mongoose.Schema({
     ref: 'User',
     required: false
   },
+}, { timestamps: true }); 
  
   
-});
+
 
 const Pathology = mongoose.model('Pathology', pathologySchema);
 

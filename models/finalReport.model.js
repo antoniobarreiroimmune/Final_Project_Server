@@ -14,7 +14,7 @@ const finalReportSchema = new mongoose.Schema({
     required: true,
     default: false 
   }
-});
+}, { timestamps: true});
 
 const FinalReport = mongoose.model('FinalReport', finalReportSchema);
 
