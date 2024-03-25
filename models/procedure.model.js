@@ -1,3 +1,5 @@
+const mongoose = require('mongoose');
+
 const procedureSchema = new mongoose.Schema({
   guardId: {
     type: mongoose.Schema.Types.ObjectId,
