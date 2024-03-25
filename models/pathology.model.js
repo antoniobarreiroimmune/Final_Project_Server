@@ -15,10 +15,12 @@ const pathologySchema = new mongoose.Schema({
     required: true,
     default: false 
   },
-  pathologyId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
-    required: false
+  pathologyInfo: {
+    pathologyId: mongoose.Schema.Types.ObjectId,
+    name: String,
+    firstName: String,
+    lastName: String,
+    email: String,
   },
 }, { timestamps: true }); 
  

@@ -1,10 +1,12 @@
 const mongoose = require('mongoose');
 
 const procedureSchema = new mongoose.Schema({
-  guardId: {
-    type: mongoose.Schema.Types.ObjectId,
-    required: [true, 'The user is mandatory'],
-    ref: 'User'
+  guardInfo: {
+    guardId: mongoose.Schema.Types.ObjectId,
+    name: String,
+    firstName: String,
+    lastName: String,
+    email: String,
   },
   name: {
     type: String,
