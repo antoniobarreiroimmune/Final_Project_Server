@@ -1,6 +1,6 @@
 const { Pathology } = require('../models/pathology.model');
 const { FinalReport } = require('../models/finalReport.model');
-const { create } = require('../models/user.model');
+
 
 const pathologyController = {
 
@@ -15,33 +15,43 @@ const pathologyController = {
 
     updatePathology: async (req, res) => {
         const { id } = req.params;
-        const updates = req.body;
-
+        const updates = req.body; 
+        
+        const allowedUpdates = ['pathologyReport', 'pathologyCompleted', 'pathologyInfo'];
+    
+        const filteredUpdates = Object.keys(updates).reduce((acc, key) => {
+            if (allowedUpdates.includes(key)) {
+                acc[key] = updates[key];
+            }
+            return acc;
+        }, {});
+    
         try {
             let pathology = await Pathology.findById(id);
-
+    
             if (!pathology) {
-                return res.status(404).json({ message: "Pathology not found." });  
+                return res.status(404).json({ message: "Pathology not found." });
             }
-
-            Object.keys(updates).forEach(update => {
-                pathology[update] = updates[update];
+    
+            Object.keys(filteredUpdates).forEach(update => {
+                pathology[update] = filteredUpdates[update];
             });
-
+    
             await pathology.save();
-
-            if (updates.pathologyCompleted && pathology.pathologyCompleted) {
+    
+            if (filteredUpdates.pathologyCompleted && pathology.pathologyCompleted) {
                 const finalReport = new FinalReport(pathology.toObject());
-                createdAt: pathology.createdAt;
+    
                 await finalReport.save();
-                return res.json(finalReport);  
+                return res.json(finalReport);
             }
-
-            res.json(pathology); 
+    
+            res.json(pathology);
         } catch (error) {
-            res.status(400).json(error);  
+            res.status(400).json(error);
         }
-    }
+    },
+    
 
 };
 

@@ -4,7 +4,24 @@ const { Pathology } = require('../models/pathology.model');
 const procedureController = {
     createProcedure: async (req, res) => {
         try {
-            const procedure = new Procedure(req.body);
+            
+            const allowedFields = [
+                'name', 'firstName', 'lastName', 'dni', 'location',
+                'isGenderViolence', 'isDomesticViolence', 'judicialBody',
+                'observations', 'procedureReport', 'procedureCompleted',
+                'guardInfo'
+            ];
+
+            
+            const validData = {};
+            allowedFields.forEach(field => {
+                if (req.body.hasOwnProperty(field)) {
+                    validData[field] = req.body[field];
+                }
+            });
+
+            
+            const procedure = new Procedure(validData);
             await procedure.save();
             res.status(201).json(procedure);
         } catch (error) {
@@ -42,21 +59,34 @@ const procedureController = {
             if (!procedure) {
                 return res.status(404).json({ message: "Procedure not found." });
             }
-            Object.keys(updates).forEach(update => {
-                procedure[update] = updates[update];
+    
+            const allowedUpdates = [
+                'name', 'firstName', 'lastName', 'dni', 'location',
+                'isGenderViolence', 'isDomesticViolence', 'judicialBody',
+                'observations', 'procedureReport', 'procedureCompleted',
+                'guardInfo'
+            ];
+    
+            allowedUpdates.forEach(field => {
+                if (updates.hasOwnProperty(field)) {
+                    procedure[field] = updates[field];
+                }
             });
+    
             await procedure.save();
+    
             if (updates.procedureCompleted && procedure.procedureCompleted) {
                 const pathology = new Pathology(procedure.toObject());
-                createdAt: procedure.createdAt,
                 await pathology.save();
                 return res.json(pathology);
             }
+    
             res.json(procedure);
         } catch (error) {
             res.status(400).json(error);
         }
     }
+    
 };
 
 module.exports = procedureController;

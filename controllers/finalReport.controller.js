@@ -16,31 +16,44 @@ const finalReportController = {
         const { id } = req.params;
         const updates = req.body;
     
+        const allowedUpdates = ['finalReport', 'finalReportCompleted'];
+
+        const filteredUpdates = Object.keys(updates).reduce((acc, key) => {
+            if (allowedUpdates.includes(key)) {
+                acc[key] = updates[key];
+            }
+            return acc;
+        }, {});
+
         try {
-            let finalReport = await FinalReport.findById(id);
-    
-            if (!finalReport) {
-                return res.status(404).json({ message: "Report not found." });  
+            let report = await FinalReport.findById(id);
+
+            if (!report) {
+                return res.status(404).json({ message: "Report not found." });
             }
-    
-            Object.keys(updates).forEach(update => {
-                finalReport[update] = updates[update];
+
+            Object.keys(filteredUpdates).forEach(update => {
+                report[update] = filteredUpdates[update];
             });
-    
-            await finalReport.save();
-    
-            if (updates.finalReportCompleted && finalReport.finalReportCompleted) {
-                const archive = new Archive(finalReport.toObject());  
-                
+
+            await report.save();
+
+         if (filteredUpdates.finalReportCompleted && report.finalReportCompleted) {
+                const archive = new Archive(report.toObject());
+
                 await archive.save();
-                return res.json(archive);  
+                return res.json(archive);
             }
-    
-            res.json(finalReport);  
-        } catch (error) {
-            res.status(400).json(error);  
+
+            res.json(report);
+    }       
+        catch (error) {
+            res.status(400).json(error);
         }
-    }
+    },
+
+
+
 };
 
 module.exports = finalReportController;
