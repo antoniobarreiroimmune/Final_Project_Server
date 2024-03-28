@@ -12,11 +12,27 @@ const finalReportController = {
         }
     },
 
+    getFinalReportById: async (req, res) => {
+        const { id } = req.params;
+    
+        try {
+            const report = await FinalReport.findById(id);
+    
+            if (!report) {
+                return res.status(404).json({ message: "Report not found." });
+            }
+    
+            res.json(report);
+        } catch (error) {
+            res.status(500).json(error);
+        }
+    },
+
     updateReport: async (req, res) => {
         const { id } = req.params;
         const updates = req.body;
     
-        const allowedUpdates = ['finalReport', 'finalReportCompleted'];
+        const allowedUpdates = ['finalReport', 'finalReportCompleted', 'guardValidate', 'pathologyValidate'];
 
         const filteredUpdates = Object.keys(updates).reduce((acc, key) => {
             if (allowedUpdates.includes(key)) {

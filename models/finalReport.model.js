@@ -13,7 +13,18 @@ const finalReportSchema = new mongoose.Schema({
     type: Boolean,
     required: true,
     default: false 
-  }
+  },
+  guardValidate:{
+    type: Boolean,
+    required: true,
+    default: false
+  },
+  pathologyValidate:{ 
+    type: Boolean,
+    required: true,
+    default: false
+  },
+  
 }, { timestamps: true});
 
 const FinalReport = mongoose.model('FinalReport', finalReportSchema);

@@ -13,6 +13,22 @@ const pathologyController = {
         }
     },
 
+    getPathologyById: async (req, res) => {
+        const { id } = req.params;
+    
+        try {
+            const pathology = await Pathology.findById(id);
+    
+            if (!pathology) {
+                return res.status(404).json({ message: "Pathology not found." });
+            }
+    
+            res.json(pathology);
+        } catch (error) {
+            res.status(500).json(error);
+        }
+    },
+
     updatePathology: async (req, res) => {
         const { id } = req.params;
         const updates = req.body; 
