@@ -6,7 +6,7 @@ const procedureController = {
         try {
             
             const allowedFields = [
-                'name', 'firstName', 'lastName', 'dni', 'location',
+                'name', 'firstName', 'lastName', 'dni', 'address', 'location',
                 'isGenderViolence', 'isDomesticViolence', 'judicialBody',
                 'observations', 'procedureReport', 'procedureCompleted',
                 'guardInfo'

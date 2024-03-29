@@ -25,17 +25,27 @@ const procedureSchema = new mongoose.Schema({
   },
   dni: {
     type: String,
-    required: [true, 'The DNI is mandatory'],
-    unique: true,
+    required: false
+   
+  },
+  address: {
+    type: String,
+    default: '',
+    trim: true
   },
   location: {
-    type: String,
-    required: [true, 'The location is mandatory'],
-    trim: true
+    type: {
+      type: String,
+      enum: ["Point"],
+      default: "Point"
+    },
+    coordinates: {
+      type: [Number],
+      default: [0, 0]
+    },
   },
   observations: {
     type: String,
-    required: false,
     trim: true
   },
   isGenderViolence: {
@@ -52,11 +62,9 @@ const procedureSchema = new mongoose.Schema({
     type: String,
     required: true,
     enum: ['Primera Instancia n1 A Coruña', 'Primera Instancia n2 A Coruña', 'Primera Instancia n3 A Coruña', 'Primera Instancia n4 A Coruña'],
-    default: ''
   },
   procedureReport: {
     type: String,
-    required: false,
     default: '',
     trim: true
   },
@@ -65,7 +73,10 @@ const procedureSchema = new mongoose.Schema({
     required: true,
     default: false
   }
-}, { timestamps: true }); 
+}, { timestamps: true });
+
+
+procedureSchema.index({ 'location': '2dsphere' });
 
 const Procedure = mongoose.model('Procedure', procedureSchema);
 
