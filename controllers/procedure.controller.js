@@ -4,23 +4,41 @@ const { Pathology } = require('../models/pathology.model');
 const procedureController = {
     createProcedure: async (req, res) => {
         try {
-            
             const allowedFields = [
                 'name', 'firstName', 'lastName', 'dni', 'address', 'location',
                 'isGenderViolence', 'isDomesticViolence', 'judicialBody',
                 'observations', 'procedureReport', 'procedureCompleted',
                 'guardInfo'
             ];
-
-            
+    
             const validData = {};
             allowedFields.forEach(field => {
                 if (req.body.hasOwnProperty(field)) {
                     validData[field] = req.body[field];
                 }
             });
-
+    
+           
+            const currentYear = new Date().getFullYear();
+    
+           
+            const lastProcedure = await Procedure.findOne({
+                procedureNumber: new RegExp(`^${currentYear}/`)
+            }).sort({procedureNumber: -1});
+    
+            let lastNumber = 0;
+            if (lastProcedure) {
+                const lastProcedureNumberParts = lastProcedure.procedureNumber.split('/');
+                lastNumber = parseInt(lastProcedureNumberParts[1]);
+            }
+    
             
+            const newProcedureNumber = `${currentYear}/${lastNumber + 1}`;
+    
+          
+            validData.procedureNumber = newProcedureNumber;
+    
+           
             const procedure = new Procedure(validData);
             await procedure.save();
             res.status(201).json(procedure);
@@ -61,7 +79,7 @@ const procedureController = {
             }
     
             const allowedUpdates = [
-                'name', 'firstName', 'lastName', 'dni', 'location',
+                 'name', 'firstName', 'lastName', 'dni', 'location',
                 'isGenderViolence', 'isDomesticViolence', 'judicialBody',
                 'observations', 'procedureReport', 'procedureCompleted',
                 'guardInfo'

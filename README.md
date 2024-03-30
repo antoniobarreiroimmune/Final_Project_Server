@@ -2,7 +2,7 @@
 
 ## Description
 
-This is a full-stack application that allows users to find and review restaurants. Users can create an account, log in, and add restaurants to their favorites. They can also add, edit, and delete restaurants.
+This is a full_stack application that manages the needs of forensic medicine workers in the administrative legal field of their processes. Workers can log in, create procedures, update them, and pass them to another department for management
 
 ## Installation
 
@@ -23,9 +23,7 @@ npm install
 ```bash
 PORT=3001
 DB_URI=your_mongoDB_URI
-CLOUDINARY_NAME=your_cloudinary_name
-CLOUDINARY_API_KEY=your_cloudinary_api_key
-CLOUDINARY_API_SECRET=your_cloudinary_api_secret
+
 ```
 
 4. Run the server to develop locally
@@ -45,7 +43,7 @@ npm run dev
 
 | URL path                    | HTTP Method       | Response                          | Action                        |
 | :--------------------------:|:-----------------:| :--------------------------------:| :----------------------------:|
-| /api/users/getFavoriteRestaurants              | GET               | [restaurants]                           | Get logged user's favorite restaurants |
+| /api/procedures/create             | POST            | [restaurants]                           | Get logged user's favorite restaurants |
 | /api/users/likeRestaurant/:restaurant_id              | PUT               | {updatedUser}                           | Like Restaurant |
 | /api/users/dislikeRestaurant/:restaurant_id              | PUT               | {updatedUser}                           | Dislike Restaurant |
 
@@ -53,8 +51,6 @@ npm run dev
 
 | URL path                    | HTTP Method       | Response                          | Action                        |
 | :--------------------------:|:-----------------:| :--------------------------------:| :----------------------------:|
-| /api/auth/getLoggedUser     | GET               | {loggedUser}                            | Get Logged User             |
-| /api/auth/signup            | POST              | {createdUser}    | Create a new user             |
 | /api/auth/login             | POST              | {authToken}                       | Log user in             |
 
 ## **Upload routes**:

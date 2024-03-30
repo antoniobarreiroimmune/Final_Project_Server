@@ -8,6 +8,12 @@ const procedureSchema = new mongoose.Schema({
     lastName: String,
     email: String,
   },
+  procedureNumber: {
+    type: String,
+    required: true,
+    unique: true,
+    trim: true
+  },
   name: {
     type: String,
     required: [true, 'The name is mandatory'],
