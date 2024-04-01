@@ -8,12 +8,11 @@ const procedureSchema = new mongoose.Schema({
     lastName: String,
     email: String,
   },
-  procedureNumber: {
-    type: String,
+procedureNumber: {
+    type: Number,
     required: true,
     unique: true,
-    trim: true
-  },
+},
   name: {
     type: String,
     required: [true, 'The name is mandatory'],
@@ -31,7 +30,8 @@ const procedureSchema = new mongoose.Schema({
   },
   dni: {
     type: String,
-    required: false
+    required: false,
+    unique: true,
    
   },
   address: {
@@ -67,7 +67,7 @@ const procedureSchema = new mongoose.Schema({
   judicialBody: {
     type: String,
     required: true,
-    enum: ['Primera Instancia n1 A Coruña', 'Primera Instancia n2 A Coruña', 'Primera Instancia n3 A Coruña', 'Primera Instancia n4 A Coruña'],
+    enum: ['Instrucción N.1 A Coruña', 'Instrucción N.2 A Coruña', 'Instrucción N.3 A Coruña', 'Instrucción N.4 A Coruña', 'Instrucción N.5 A Coruña', 'Instrucción N.6 A Coruña', 'Instrucción N.7 A Coruña', 'Instrucción N.8 A Coruña'],
   },
   procedureReport: {
     type: String,

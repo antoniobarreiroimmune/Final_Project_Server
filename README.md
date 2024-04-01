@@ -1,60 +1,103 @@
-# Project - Restaurant
+# Forensic Medicine API Documentation
 
-## Description
+This full-stack application caters to the administrative and legal needs of forensic medicine workers. It enables users to log in, create, update, and pass procedures to other departments for further management.
 
-This is a full_stack application that manages the needs of forensic medicine workers in the administrative legal field of their processes. Workers can log in, create procedures, update them, and pass them to another department for management
+## Base URL
 
-## Installation
+`http://localhost:3001/api`
 
-1. Clone the repository
+All endpoints are relative to this base URL.
 
-```bash
-git clone
-```
+## Authentication
 
-2. Install the dependencies
+- **Type:** Bearer Token
+- Authentication is required for most endpoints. Ensure to include the bearer token in the header of your requests.
 
-```bash
-npm install
-```
+## Endpoints Overview
 
-3. Create a .env file in the root folder and add the following environment variables:
+### User
 
-```bash
-PORT=3001
-DB_URI=your_mongoDB_URI
+#### Login
 
-```
+- **Endpoint:** `/auth/login`
+- **Method:** POST
+- **Body:**
+  ```json
+  {
+    "email": "user@example.com",
+    "password": "yourPassword"
+  }
+  ```
+- **Description:** Authenticates a user and returns a session token.
+- **Response:** `{ "token": "YOUR_SESSION_TOKEN" }`
 
-4. Run the server to develop locally
+### Procedures
 
-```bash
-npm run dev
-```
+#### Create Procedure
 
+- **Endpoint:** `/procedures/create`
+- **Method:** POST
+- **Description:** Creates a new procedure with detailed information.
+- **Body Required:** Yes (procedureNumber, name, firstName, lastName, indicators for gender and domestic violence, judicialBody, procedureReport, procedureCompleted).
 
+#### Edit Procedure
 
+- **Endpoint:** `/procedures/edit/{procedureId}`
+- **Method:** PUT
+- **Description:** Updates information for an existing procedure by its ID.
 
-# API Routes
+#### List Procedures
 
+- **Endpoint:** `/procedures/list`
+- **Method:** GET
+- **Description:** Retrieves a list of all procedures.
 
+#### Show Procedure Details
 
-## **User routes**:
+- **Endpoint:** `/procedures/show/{procedureId}`
+- **Method:** GET
+- **Description:** Fetches details of a specific procedure by ID.
 
-| URL path                    | HTTP Method       | Response                          | Action                        |
-| :--------------------------:|:-----------------:| :--------------------------------:| :----------------------------:|
-| /api/procedures/create             | POST            | [restaurants]                           | Get logged user's favorite restaurants |
-| /api/users/likeRestaurant/:restaurant_id              | PUT               | {updatedUser}                           | Like Restaurant |
-| /api/users/dislikeRestaurant/:restaurant_id              | PUT               | {updatedUser}                           | Dislike Restaurant |
+### Pathology
 
-## **Auth routes**:
+#### List Pathologies
 
-| URL path                    | HTTP Method       | Response                          | Action                        |
-| :--------------------------:|:-----------------:| :--------------------------------:| :----------------------------:|
-| /api/auth/login             | POST              | {authToken}                       | Log user in             |
+- **Endpoint:** `/pathology/list`
+- **Method:** GET
+- **Description:** Returns a list of pathology records.
 
-## **Upload routes**:
+#### Show Pathology
 
-| URL path                    | HTTP Method       | Response                          | Action                        |
-| :--------------------------:|:-----------------:| :--------------------------------:| :----------------------------:|
-| /api/upload     | POST               | CLOUDINARY_LINK                            | Upload Image to Cloudinary
+- **Endpoint:** `/pathology/{pathologyId}`
+- **Method:** GET
+- **Description:** Retrieves detailed information for a specified pathology by ID.
+
+#### Edit Pathology
+
+- **Endpoint:** `/pathology/edit/{pathologyId}`
+- **Method:** PUT
+- **Description:** Updates a specific pathology record by ID.
+
+### Final Report
+
+#### List Final Reports
+
+- **Endpoint:** `/finalreport/list`
+- **Method:** GET
+- **Description:** Fetches a list of final reports.
+
+#### Show Final Report
+
+- **Endpoint:** `/finalreport/{reportId}`
+- **Method:** GET
+- **Description:** Retrieves a specific final report by ID.
+
+#### Edit Final Report
+
+- **Endpoint:** `/finalreport/edit/{reportId}`
+- **Method:** PUT
+- **Description:** Updates the specified final report.
+
+## Note on Responses
+
+Responses for successful requests typically return a JSON object containing the requested data or a confirmation of the action taken. Errors are returned as JSON with an error message and, when applicable, an error code.
