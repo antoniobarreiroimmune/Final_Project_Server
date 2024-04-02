@@ -10,6 +10,21 @@ const pathologySchema = new mongoose.Schema({
     default: '',
     trim: true
   },
+  histopathology:{
+    type: Boolean,
+    required: true,
+    default: false
+  },
+  toxics: {
+    type: Boolean,
+    required: true,
+    default: false
+  },
+  biology: {
+    type: Boolean,
+    required: true,
+    default: false
+  },
   pathologyCompleted: {
     type: Boolean,
     required: true,

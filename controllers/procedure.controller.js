@@ -78,7 +78,7 @@ const procedureController = {
                 'name', 'firstName', 'lastName', 'dni', 'location',
                 'isGenderViolence', 'isDomesticViolence', 'judicialBody',
                 'observations', 'procedureReport', 'procedureCompleted',
-                'guardInfo'
+                'guardInfo','address'
             ];
 
             allowedUpdates.forEach(field => {

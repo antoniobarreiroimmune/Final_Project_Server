@@ -33,7 +33,7 @@ const pathologyController = {
         const { id } = req.params;
         const updates = req.body; 
         
-        const allowedUpdates = ['pathologyReport', 'pathologyCompleted', 'pathologyInfo'];
+        const allowedUpdates = ['pathologyReport', 'pathologyCompleted', 'pathologyInfo','histopathology','toxics','biology'];
     
         const filteredUpdates = Object.keys(updates).reduce((acc, key) => {
             if (allowedUpdates.includes(key)) {

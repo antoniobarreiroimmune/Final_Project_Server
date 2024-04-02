@@ -8,7 +8,7 @@ const archiveSchema = new mongoose.Schema({
         required: true,
         default: Date.now
     }
-});
+},{ timestamps: true});
 
 const Archive = mongoose.model('Archive', archiveSchema);
 
