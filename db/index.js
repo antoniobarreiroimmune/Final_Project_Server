@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 
 const MONGO_URI =
-  process.env.MONGODB_URI || "mongodb+srv://antoniobmrb:T191087q@cluster0.flixhs4.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+  process.env.MONGODB_URI ||  process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/Final_Project_Server";
 
 mongoose
   .connect(MONGO_URI)
